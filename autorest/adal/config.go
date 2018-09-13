@@ -50,7 +50,7 @@ func NewOAuthConfig(activeDirectoryEndpoint, tenantID string) (*OAuthConfig, err
 		return nil, err
 	}
 	// it's legal for tenantID to be empty so don't validate it
-	const activeDirectoryEndpointTemplate = "%s/oauth2/%s?api-version=%s"
+	const activeDirectoryEndpointTemplate = "%s/oauth2/%s"
 	u, err := url.Parse(activeDirectoryEndpoint)
 	if err != nil {
 		return nil, err
@@ -59,15 +59,15 @@ func NewOAuthConfig(activeDirectoryEndpoint, tenantID string) (*OAuthConfig, err
 	if err != nil {
 		return nil, err
 	}
-	authorizeURL, err := u.Parse(fmt.Sprintf(activeDirectoryEndpointTemplate, tenantID, "authorize", activeDirectoryAPIVersion))
+	authorizeURL, err := u.Parse(fmt.Sprintf(activeDirectoryEndpointTemplate, tenantID, "authorize"))
 	if err != nil {
 		return nil, err
 	}
-	tokenURL, err := u.Parse(fmt.Sprintf(activeDirectoryEndpointTemplate, tenantID, "token", activeDirectoryAPIVersion))
+	tokenURL, err := u.Parse(fmt.Sprintf(activeDirectoryEndpointTemplate, tenantID, "token"))
 	if err != nil {
 		return nil, err
 	}
-	deviceCodeURL, err := u.Parse(fmt.Sprintf(activeDirectoryEndpointTemplate, tenantID, "devicecode", activeDirectoryAPIVersion))
+	deviceCodeURL, err := u.Parse(fmt.Sprintf(activeDirectoryEndpointTemplate, tenantID, "devicecode"))
 	if err != nil {
 		return nil, err
 	}
